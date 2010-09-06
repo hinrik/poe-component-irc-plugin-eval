@@ -2,6 +2,7 @@ Revision history for POE-Component-IRC-Plugin-Eval
 
 {{$NEXT}}
     - Remove some debugging print statements
+    - Make all warnings fatal
 
 0.01  Wed Sep 1 04:37:31 GMT 2010
     - Initial release

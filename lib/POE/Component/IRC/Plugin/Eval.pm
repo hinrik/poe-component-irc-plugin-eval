@@ -1,7 +1,7 @@
 package POE::Component::IRC::Plugin::Eval;
 
 use strict;
-use warnings;
+use warnings FATAL => 'all';
 use Carp 'croak';
 use POE;
 use POE::Component::IRC::Common qw(strip_color strip_formatting),

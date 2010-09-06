@@ -36,8 +36,8 @@ instance is running. Default is 'localhost'.
 B<'Server_port'>, the host where the L<App::EvalServer|App::EvalServer>
 instance is running. Default is 14400.
 
-B<'Channels'>, an array reference of channels to post messages to. You must
-specify at least one channel.
+B<'Channels'>, an array reference of channel names. If you don't provide
+this, the plugin will be active in all channels.
 
 B<'Method'>, how you want messages to be delivered. Valid options are
 'notice' (the default) and 'privmsg'.

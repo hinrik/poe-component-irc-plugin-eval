@@ -3,6 +3,8 @@ package POE::Component::IRC::Plugin::Eval;
 use strict;
 use warnings FATAL => 'all';
 use Carp 'croak';
+use Encode qw(is_utf8);
+use List::Util qw(first);
 use POE;
 use POE::Component::IRC::Common qw(strip_color strip_formatting),
     qw(parse_user irc_to_utf8 NORMAL DARK_GREEN ORANGE TEAL BROWN);
@@ -14,10 +16,6 @@ use POE::Wheel::SocketFactory;
 sub new {
     my ($package, %args) = @_; 
     my $self = bless \%args, $package;
-
-    if (ref $self->{Channels} ne 'ARRAY' || !$self->{Channels}) {
-        croak __PACKAGE__ . ': No channels defined';
-    }
 
     $self->{Server_host} = 'localhost' if !defined $self->{Server_port};
     $self->{Server_port} = 14400       if !defined $self->{Server_port};
@@ -73,6 +71,7 @@ sub S_botcmd_eval {
     my $chan          = ${ $_[1] };
     my ($lang, $code) = ${ $_[2] } =~ /^(\S+) (.*)/;
 
+    return PCI_EAT_NONE if $self->_ignoring_channel($chan);
     $poe_kernel->post($self->{session_id}, 'new_eval', $nick, $chan, $lang, $code);
     return PCI_EAT_NONE;
 }
@@ -191,6 +190,19 @@ sub _clean {
     return $string;
 }
 
+sub _ignoring_channel {
+    my ($self, $chan) = @_;
+
+    if ($self->{Channels}) {
+        return 1 if !first {
+            my $c = $chan;
+            $c = irc_to_utf8($c) if is_utf8($_);
+            $_ eq $c
+        } @{ $self->{Channels} };
+    }
+    return;
+}
+
 1;
 
 =encoding utf8
@@ -231,8 +243,8 @@ instance is running. Default is 'localhost'.
 B<'Server_port'>, the host where the L<App::EvalServer|App::EvalServer>
 instance is running. Default is 14400.
 
-B<'Channels'>, an array reference of channels to post messages to. You must
-specify at least one channel.
+B<'Channels'>, an array reference of channel names. If you don't provide
+this, the plugin will be active in all channels.
 
 B<'Method'>, how you want messages to be delivered. Valid options are
 'notice' (the default) and 'privmsg'.

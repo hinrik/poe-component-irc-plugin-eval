@@ -1,6 +1,8 @@
 Revision history for POE-Component-IRC-Plugin-Eval
 
 {{$NEXT}}
+
+0.02  Mon Sep 6 04:08:11 GMT 2010
     - Remove some debugging print statements
     - Make all warnings fatal
     - Make the 'Channels' parameter actually do something

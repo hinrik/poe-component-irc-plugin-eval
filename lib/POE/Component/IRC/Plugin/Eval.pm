@@ -87,7 +87,6 @@ sub new_eval {
         SuccessEvent  => 'connected',
     );
 
-    print STDERR "socket id ".$sock_wheel->ID."\n";
     $self->{evals}{$sock_wheel->ID} = {
         nick       => $nick,
         chan       => $chan,
@@ -103,7 +102,6 @@ sub connect_failed {
     my ($self, $reason, $id) = @_[OBJECT, ARG2, ARG3];
     my $irc = $self->{irc};
 
-    print STDERR "$reason\n";
     my $eval = delete $self->{evals}{$id};
     my $msg = "Error: Couldn't connect to eval server: $reason";
     my $color = 'Error: '.BROWN."Couldn't connect to eval server: $reason".NORMAL;
@@ -135,7 +133,6 @@ sub eval_error {
     my ($self, $reason, $rw_id) = @_[OBJECT, ARG2, ARG3];
     my $irc = $self->{irc};
 
-    print STDERR "$reason\n";
     my $eval;
     for my $eval_id (keys %{ $self->{evals} }) {
         if ($self->{evals}{$eval_id}{rw_wheel}->ID == $rw_id) {

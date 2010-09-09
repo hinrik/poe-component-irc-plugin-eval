@@ -1,6 +1,8 @@
 Revision history for POE-Component-IRC-Plugin-Eval
 
 {{$NEXT}}
+
+0.04  Thu Sep 9 06:38:13 GMT 2010
     - Forgot to mention the BotCommand requirement in the SYNOPSIS
 
 0.03  Thu Sep 9 06:23:27 GMT 2010

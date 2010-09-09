@@ -216,13 +216,16 @@ POE::Component::IRC::Plugin::Eval - Evaluate code with App::EvalServer
 To quickly get an IRC bot with this plugin up and running, you can use
 L<App::Pocoirc|App::Pocoirc>:
 
- $ pocoirc -s irc.perl.org -j '#bots' -p Eval
+ $ pocoirc -s irc.perl.org -j '#bots' -p BotCommand -p Eval
 
 Or use it in your code:
 
+ use POE::Component::IRC::Plugin::BotCommand;
  use POE::Component::IRC::Plugin::Eval;
 
- # evluate code in #foobar
+ $irc->plugin_add(BotCommand => POE::Component::IRC::Plugin::BotCommand->new());
+
+ # evaluate code in #foobar
  $irc->plugin_add(Eval => POE::Component::IRC::Plugin::Eval->new(
      Server_port => 14400,
      Channels    => ['#foobar'],

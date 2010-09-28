@@ -1,6 +1,8 @@
 Revision history for POE-Component-IRC-Plugin-Eval
 
 {{$NEXT}}
+
+0.05  Tue Sep 28 08:50:48 GMT 2010
     - Update SYNOPSIS to reflect App-Pocoirc changes
 
 0.04  Thu Sep 9 06:38:13 GMT 2010

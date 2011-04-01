@@ -1,6 +1,8 @@
 Revision history for POE-Component-IRC-Plugin-Eval
 
 {{$NEXT}}
+
+0.06  Fri Apr 1 23:27:39 GMT 2011
     - Make the colors slightly less annoying
 
 0.05  Tue Sep 28 08:50:48 GMT 2010

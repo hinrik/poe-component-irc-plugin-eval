@@ -1,10 +1,19 @@
 use strict;
 use warnings;
-use Test::More tests => 3;
+
+use Test::More;
+
+BEGIN {
+    eval "use JSON::Any";
+    plan skip_all => "JSON::Any couldn't be loaded" if $@;
+}
+
 use POE;
 use POE::Component::IRC::State;
 use POE::Component::IRC::Plugin::BotCommand;
 use POE::Component::IRC::Plugin::Eval;
+
+plan tests => 3;
 
 my $irc = POE::Component::IRC::State->spawn( plugin_debug => 1 );
 
